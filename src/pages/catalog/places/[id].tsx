@@ -40,6 +40,8 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
     return item.image;
   });
 
+  console.log('place', place);
+
   return (
     <Container className="px-5">
       <Breadcrumb className="breadcrumb">
@@ -65,13 +67,19 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
           <LocationDescription item={place} />
           <AnchorBtns />
           <TextDescription item={place} />
-          <TextEvents events={place.event}/>
-          <TextKitchen children={place.children_kitchen} kitchens={place.kitchen}/>
+          <TextEvents events={place.event} />
+          <TextKitchen
+            children_kitchen={place.children_kitchen}
+            kitchens={place.kitchen}
+          />
 
           <PlaceAreas areas={place.areas} average_check={place.average_check} />
-          
+
           <TextDetails description={place.description} />
-          <TextFeatures features={place.type_feature} territories={place.type_place} />
+          <TextFeatures
+            features={place.type_feature}
+            territories={place.type_place}
+          />
 
           <AlbumCardContainer
             territory={place.territory_desc}
@@ -149,7 +157,7 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
           <BookingForm
             avatar={user?.avatar || '/img/header/avatar.svg'}
             first_name={user?.first_name || 'Имя'}
-            last_name={user?.last_name ||'Фамилия'}
+            last_name={user?.last_name || 'Фамилия'}
             phone={user?.phone || '123456789'}
             email={user?.email || 'sshuahuash@mail.ru'}
           />

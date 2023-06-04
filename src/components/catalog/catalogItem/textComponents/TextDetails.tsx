@@ -5,9 +5,10 @@ type TextDetailsProps = {
   description: string;
 };
 
-function TextDetails ({ description }: TextDetailsProps) {
+function TextDetails({ description }: TextDetailsProps) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const new_description = description.slice(0, 128) + '...';
+  const summaryLength = 128;
+  const new_description = description.slice(0, summaryLength) + '...';
 
   return (
     <Card className="border-0 mb-xl-5 mb-4">
@@ -15,7 +16,7 @@ function TextDetails ({ description }: TextDetailsProps) {
         <Card.Title as="h4" className="text-center text-sm-start mb-3">
           Детали площадки
         </Card.Title>
-        {description.length > 128 ? (
+        {description.length > summaryLength ? (
           <>
             <Card.Text
               className="mb-2 text-center text-sm-start "
@@ -45,6 +46,6 @@ function TextDetails ({ description }: TextDetailsProps) {
       </Card.Body>
     </Card>
   );
-};
+}
 
 export default TextDetails;

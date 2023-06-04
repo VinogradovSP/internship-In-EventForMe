@@ -300,7 +300,7 @@
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  @include adaptiv-value('margin-bottom', 48, 10);
+  @include adaptiv-value('margin-bottom', 48, 15);
 
   figcaption {
     min-width: 50%;
@@ -317,7 +317,7 @@
     }
     figcaption {
       padding: 0;
-      margin: 15px auto;
+      margin: 0 auto;
     }
   }
   @media (max-width: 700px) {
@@ -338,5 +338,25 @@
   }
   &__text {
     @include fz(14, 14);
+  }
+}
+
+.articlesWeddings_figure{
+  @include adaptiv-value('max-width', 450, 280);
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+// addProperty preview
+.preview_header {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 600px) {
+    span {
+      display: none;
+    }
   }
 }

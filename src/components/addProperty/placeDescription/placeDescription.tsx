@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import { Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 import RenderCheckbox from '../renderChekbox/RenderCheckBox';
 import { LOCATION, KITCHEN, EVENT, ADD_PLACE_NAMES } from '@/constant';
-import styles from '@/styles/addProperty/AddProperty.module.scss';
+import styles from '@/styles/addproperty/AddProperty.module.scss';
 
 type PlaceDescriptionProps = {
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;

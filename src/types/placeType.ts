@@ -80,7 +80,7 @@ type ImagesPlace = {
   place: number;
 };
 
-type Location = {
+export type Location = {
   id: number;
   location:
     | 'sea'
@@ -163,7 +163,6 @@ export type WelcomeZone = {
   id: number;
   images_welcome: WelcomeZoneImage[];
   welcome_desc: string;
-
   place: number;
 };
 

@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 type AlbumCardContainerProps = {
   territory: string;
-  welcome_zones: WelcomeZone[];
-  outside_reg: OutsideReg[];
+  welcome_zones: WelcomeZone[] | string | undefined;
+  outside_reg: OutsideReg[] | string | undefined;
 };
 
 type DataType = {
@@ -22,6 +22,22 @@ export default function AlbumCardContainer({
   const [data, setData] = useState<DataType[]>([]);
   const [regPhotos, setRegPhotos] = useState<string[]>([]);
   const [welcomePhotos, setWelcomePhotos] = useState<string[]>([]);
+  let outreg_desc = '';
+  let welcome_desc = '';
+
+  if (outside_reg?.length) {
+    outreg_desc =
+      typeof outside_reg === 'string'
+        ? outside_reg
+        : outside_reg[0].outreg_conditions;
+  }
+
+  if (welcome_zones?.length) {
+    welcome_desc =
+      typeof welcome_zones === 'string'
+        ? welcome_desc
+        : welcome_zones[0].welcome_desc;
+  }
 
   useEffect(() => {
     const alldata: DataType[] = [];
@@ -32,7 +48,7 @@ export default function AlbumCardContainer({
     if (outside_reg && outside_reg.length) {
       alldata.push({
         title: 'Выездная регистрация',
-        desc: outside_reg[0].outreg_conditions,
+        desc: outreg_desc,
         img: regPhotos,
       });
     }
@@ -40,7 +56,7 @@ export default function AlbumCardContainer({
     if (welcome_zones && welcome_zones.length) {
       alldata.push({
         title: 'Welcome-зона',
-        desc: welcome_zones[0].welcome_desc,
+        desc: welcome_desc,
         img: welcomePhotos,
       });
     }
@@ -51,10 +67,16 @@ export default function AlbumCardContainer({
   }, [welcomePhotos, regPhotos]);
 
   useEffect(() => {
-    const reg_photo = outside_reg[0]?.images_out_reg.map((img) => img.image);
-    const welcome_photo = welcome_zones[0]?.images_welcome.map(
-      (img) => img.image
-    );
+    let reg_photo: string[] = [];
+    let welcome_photo: string[] = [];
+
+    if (outside_reg !== undefined && typeof outside_reg !== 'string') {
+      reg_photo = outside_reg[0]?.images_out_reg.map((img) => img.image);
+    }
+
+    if (welcome_zones !== undefined && typeof welcome_zones !== 'string') {
+      welcome_photo = welcome_zones[0]?.images_welcome.map((img) => img.image);
+    }
 
     setWelcomePhotos(welcome_photo);
     setRegPhotos(reg_photo);

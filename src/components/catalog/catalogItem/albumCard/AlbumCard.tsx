@@ -97,7 +97,7 @@ function AlbumCard({ id, title, description, pathImg }: AlbumCardProps) {
                 src="/img/emptyPhoto.png"
                 height={270}
                 width={500}
-                imgAlt={title}
+                imgalt={title}
                 quality={100}
                 className={
                   id % 2 === 0 ? styles.rounded_left : styles.rounded_right

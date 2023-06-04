@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import styles from '@/styles/catalog/Catalog.module.scss';
 

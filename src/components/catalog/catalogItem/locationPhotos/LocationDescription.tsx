@@ -1,24 +1,25 @@
 import Link from 'next/link';
 import { Card } from 'react-bootstrap/';
 import styles from '@/styles/catalog/places/LocationPhotos.module.scss';
-import { PlaceReceived } from '@/types/placeType';
+import { Place, PlaceReceived } from '@/types/placeType';
 import { numberOfAreas } from '@/services/parse.service';
 
 type LocationDescriptionProps = {
-  item: PlaceReceived;
+  item: PlaceReceived | Place;
 };
 
 function LocationDescription({ item }: LocationDescriptionProps) {
-
   return (
     <>
       <div className={styles.location__flex_container}>
         <h3>{item.title}</h3>
-        <Card.Footer className={styles.text_title}>
-          <span>
-            {item.areas.length} {numberOfAreas(item.areas.length)}
-          </span>
-        </Card.Footer>
+        {item.areas && (
+          <Card.Footer className={styles.text_title}>
+            <span>
+              {item.areas.length} {numberOfAreas(item.areas.length)}
+            </span>
+          </Card.Footer>
+        )}
       </div>
 
       <div className={styles.location__flex_container}>
@@ -27,7 +28,7 @@ function LocationDescription({ item }: LocationDescriptionProps) {
           <i className="fi-map" /> <p>На карте</p>
         </Link>
       </div>
-      <p>Метро: {item.metro || 'не указано' }</p>
+      <p>Метро: {item.metro || 'не указано'}</p>
     </>
   );
 }

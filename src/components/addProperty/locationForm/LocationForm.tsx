@@ -12,7 +12,8 @@ import { DaDataValue } from '@/types/dadata';
 import { fetchAddress } from './locationAPI';
 import { ADD_PLACE_NAMES } from '@/constant';
 import useOutsideClick from '@/hooks/useOutsideClick';
-import styles from '@/styles/addProperty/AddProperty.module.scss';
+import { SUG_URL, TOKEN } from '@/constant';
+import styles from '@/styles/addproperty/AddProperty.module.scss';
 
 type LocationFormProps = {
   setCity: (data: string) => void;
