@@ -31,7 +31,7 @@ function TextKitchen ({ children, kitchens }: TextKitchenProps) {
       </Card.Text>
     </Card.Body>
     <Button href="#" className={styles.text__cuisine_btn}>
-      <i className='fi-file-clean me-2' />
+      <i className="fi-file-clean me-2" />
       Запросить банкетное меню
     </Button>
   </div>

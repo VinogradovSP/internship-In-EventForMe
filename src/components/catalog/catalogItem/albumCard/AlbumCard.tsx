@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from '@/styles/catalog/places/Places.module.scss';
@@ -48,7 +48,7 @@ function AlbumCard({ id, title, description, pathImg }: AlbumCardProps) {
         <p className="mb-2">{description}</p>
       </figcaption>
 
-      <div style={{ maxWidth: '50%' }}>
+      <div className="w-md-50 w-75">
         <LightGallery
           plugins={[lgThumbnail, lgZoom, lgFullScreen]}
           selector=".gallery-item"
@@ -73,43 +73,41 @@ function AlbumCard({ id, title, description, pathImg }: AlbumCardProps) {
             {pathImg.length > 0 ? (
               <>
                 {pathImg.map((path, index) => (
-                  <>
-                    <SwiperSlide key={index}>
-                      <GalleryItem
-                        href={path}
-                        thumb={[path, 420, 270]}
-                        data-external-thumb-image={path}
-                        imgalt="Image"
-                        quality={100}
-                        className={
-                          id % 2 === 0
-                            ? styles.rounded_left
-                            : styles.rounded_right
-                        }
-                        light='false'
-                        caption=""
-                        video='false'
-                      />
-                    </SwiperSlide>
-                  </>
+                  <SwiperSlide key={index + (id % 2)}>
+                    <GalleryItem
+                      href={path}
+                      thumb={[path, 500, 270]}
+                      data-external-thumb-image={path}
+                      imgAlt="Image"
+                      quality={100}
+                      className={
+                        id % 2 === 0
+                          ? styles.rounded_left
+                          : styles.rounded_right
+                      }
+                      light="false"
+                      caption=""
+                      video="false"
+                    />
+                  </SwiperSlide>
                 ))}
-                <SlidesCount />
               </>
             ) : (
               <ImageLoader
                 src="/img/emptyPhoto.png"
                 height={270}
-                width={420}
-                imgalt={title}
+                width={500}
+                imgAlt={title}
                 quality={100}
                 className={
                   id % 2 === 0 ? styles.rounded_left : styles.rounded_right
                 }
-                light='false'
+                light="false"
                 caption=""
-                video='false'
+                video="false"
               />
             )}
+            {pathImg.length > 1 && <SlidesCount />}
           </Swiper>
         </LightGallery>
       </div>

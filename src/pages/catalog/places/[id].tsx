@@ -7,7 +7,7 @@ import BookingForm from '@/components/bookingForm/BookingForm';
 import ContactForm from '@/components/bookingForm/ContactForm';
 import AlbumCard from '@/components/catalog/catalogItem/albumCard/AlbumCard';
 import WeddingsPhotos from '@/components/catalog/catalogItem/weddingPhotos/WeddingsPhotos';
-import ArticlesWeddings from '@/components/catalog/catalogItem/articlesWeddings/ArticlesWeddings';
+import ArticleWeddings from '@/components/catalog/catalogItem/articleWeddings/ArticleWeddings';
 import TextDescription from '@/components/catalog/catalogItem/textComponents/TextDescription';
 import TextFeatures from '@/components/catalog/catalogItem/textComponents/TextFeatures';
 import TextEvents from '@/components/catalog/catalogItem/textComponents/TextEvents';
@@ -36,10 +36,12 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
   const { providerCards } = cards || {};
   const { weddingPhotos } = cards || {};
   const { articles } = cards || {};
-  const placeImgList = place.images_place.map((item)=>{return item.image});
+  const placeImgList = place.images_place.map((item) => {
+    return item.image;
+  });
 
   return (
-    <Container>
+    <Container className="px-5">
       <Breadcrumb className="breadcrumb">
         <Breadcrumb.Item linkAs={Link} href={Paths.Home}>
           Главная
@@ -53,9 +55,7 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
         <Breadcrumb.Item active>{place.title}</Breadcrumb.Item>
       </Breadcrumb>
 
-      <LocationPhotos
-        photoUrls={placeImgList}
-      />
+      <LocationPhotos photoUrls={placeImgList} />
 
       {/* это - общий контейнер страницы на все блоки под верхними фото */}
 
@@ -108,10 +108,10 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
             <Card.Title as="h4" className="mb-xl-4 mb-md-3 mb-sm-2 w-100">
               Статьи о свадьбах на площадке “Villa Arcobaleno”
             </Card.Title>
-            <div className="d-flex justify-content-evenly">
+            <div className="d-flex justify-content-center justify-content-md-evenly flex-wrap">
               {articles &&
                 articles.map((item) => (
-                  <ArticlesWeddings
+                  <ArticleWeddings
                     key={item.id}
                     title={item.title}
                     description={item.description}
@@ -122,10 +122,10 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
             </div>
           </Row>
           <div id="map" className={styles.map__container}>
-            <YaMap lat={place.width} long={place.longitude}/>
+            <YaMap lat={place.width} long={place.longitude} />
           </div>
           <div id="comments" className={styles.comments__container}>
-            <YaComments id={place.id_yandex}/>
+            <YaComments id={place.id_yandex} />
           </div>
         </Col>
 
@@ -165,7 +165,7 @@ export default function CatalogItem({ place, user }: CatalogItemProps) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
   const API = process.env.NODE_ENV === 'production' ? process.env.URL : URL;
-  
+
   let response = await fetch(`${API}catalog/place/${id}/`);
   if (response.ok) {
     let result = await response.json();

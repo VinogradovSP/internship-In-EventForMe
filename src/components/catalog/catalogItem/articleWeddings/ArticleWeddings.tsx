@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import ImageLoader from '@/components/_finder/ImageLoader';
 
-type  ArticlesWeddingsProps = {
+type  ArticleWeddingsProps = {
   title: string;
   description: string;
   pathImg: string;
   dateText: string;
 };
 
-function ArticlesWeddings ({ title, description, pathImg, dateText}: ArticlesWeddingsProps) {
+function ArticleWeddings ({ title, description, pathImg, dateText}: ArticleWeddingsProps) {
   //* для дополнительного текста
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const new_description = description.slice(0, 120) + '...';
 
   return (
     <figure
-      style={{ maxWidth: '430px' }}
-      className=" card-hover text-decoration-none text-dark rounded-3 mx-2"
+      // style={{ maxWidth: '350px' }}
+      className=" card-hover text-decoration-none text-dark rounded-3 px-2 w-75 w-md-50"
     >
       <ImageLoader
         src={pathImg}
@@ -66,4 +66,4 @@ function ArticlesWeddings ({ title, description, pathImg, dateText}: ArticlesWed
   );
 };
 
-export default ArticlesWeddings;
+export default ArticleWeddings;

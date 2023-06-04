@@ -12,19 +12,19 @@ function TextDetails ({ description }: TextDetailsProps) {
   return (
     <Card className="border-0 mb-xl-5 mb-4">
       <Card.Body className="p-0">
-        <Card.Title as="h4" className="mb-3">
+        <Card.Title as="h4" className="text-center text-sm-start mb-3">
           Детали площадки
         </Card.Title>
         {description.length > 128 ? (
           <>
             <Card.Text
-              className="mb-2"
+              className="mb-2 text-center text-sm-start "
               style={isDetailsOpen ? { display: 'none' } : {}}
             >
               {new_description}
             </Card.Text>
             <Card.Text
-              className="mb-2"
+              className="mb-2 text-center text-sm-start "
               style={!isDetailsOpen ? { display: 'none' } : {}}
             >
               {description}
@@ -38,7 +38,9 @@ function TextDetails ({ description }: TextDetailsProps) {
             </Card.Text>
           </>
         ) : (
-          <Card.Text className="mb-2">{description}</Card.Text>
+          <Card.Text className="mb-2 text-center text-sm-start ">
+            {description}
+          </Card.Text>
         )}
       </Card.Body>
     </Card>

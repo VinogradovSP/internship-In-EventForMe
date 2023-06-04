@@ -13,7 +13,7 @@ export type Area = {
   deposit: number;
   scheme_of_payment: 'bah' | 'ban' | 'hall';
   detail_location: string;
-  area_img: string [];
+  area_img: string[];
   bare_lease?: boolean;
   reserved_days: Date[];
 };
@@ -21,11 +21,12 @@ export type Area = {
 //тип приходящего с бека Area
 export type AreaRecieved = Omit<
   Area,
-  'type_area' | 'images_area' | 'place_id' | 'color_hall'
+  'type_area' | 'images_area' | 'place_id' | 'color_hall' | 'reserved_days'
 > & {
   images_area: AreaImages[] | [];
   type_area: TypeArea;
   place: number;
+  reserved_days: 'string';
   color_hall:
     | 'white'
     | 'pink'

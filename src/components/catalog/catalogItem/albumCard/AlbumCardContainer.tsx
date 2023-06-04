@@ -8,11 +8,6 @@ type AlbumCardContainerProps = {
   outside_reg: OutsideReg[];
 };
 
-// id: number;
-// title: string;
-// description: string[];
-// pathImg: string[];
-
 type DataType = {
   title: string;
   desc: string;
@@ -54,8 +49,6 @@ export default function AlbumCardContainer({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [welcomePhotos, regPhotos]);
-
-  console.log('data', data);
 
   useEffect(() => {
     const reg_photo = outside_reg[0]?.images_out_reg.map((img) => img.image);

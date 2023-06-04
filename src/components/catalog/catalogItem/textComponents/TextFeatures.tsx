@@ -1,6 +1,6 @@
 import { Row } from 'react-bootstrap';
 import { Feature, TypePlace } from '@/types/placeType';
-import { FEATURES, TERRITORY } from "@/constant";
+import { FEATURES, TERRITORY } from '@/constant';
 
 type TextFeaturesProps = {
   features: Feature[];
@@ -15,6 +15,7 @@ function TextFeatures({ features, territories }: TextFeaturesProps) {
   features.forEach(({ id }) => {
     let res = FEATURES.filter((value) => value[0] === id);
     let featureName = res[0][1] as string;
+
     if (featureListFirst.length < 3) {
       featureListFirst.push(featureName);
     } else if (featureListSecond.length < 3) {
@@ -22,11 +23,12 @@ function TextFeatures({ features, territories }: TextFeaturesProps) {
     } else {
       featureListThird.push(featureName);
     }
-  })
+  });
 
   territories.forEach(({ id }) => {
     let res = TERRITORY.filter((value) => value[0] === id);
     let territoryName = res[0][1] as string;
+
     if (featureListFirst.length < 3) {
       featureListFirst.push(territoryName);
     } else if (featureListSecond.length < 3) {
@@ -34,12 +36,10 @@ function TextFeatures({ features, territories }: TextFeaturesProps) {
     } else {
       featureListThird.push(territoryName);
     }
-  })
+  });
 
   function renderFeatures(featureList: string[]) {
-    return featureList.map((feature, i) => (
-      <li key={i}> {feature} </li>
-    ))
+    return featureList.map((feature, i) => <li key={i}> {feature} </li>);
   }
 
   return (
@@ -58,6 +58,6 @@ function TextFeatures({ features, territories }: TextFeaturesProps) {
       </Row>
     </Row>
   );
-};
+}
 
 export default TextFeatures;

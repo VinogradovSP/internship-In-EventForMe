@@ -328,7 +328,7 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
               <div className={styles.slider_text}>
                 <p>Стоимость</p>
                 <p className={styles.slider_text_data}>
-                  Аренда от {area.min_price_rent} ₽ + от {area.deposit} ₽/чел
+                  Аренда от {area.min_price_rent}₽ + от {area.deposit}₽/чел
                 </p>
               </div>
               <div className={styles.slider_text}>
@@ -354,7 +354,7 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
               <div className={styles.slider_text}>
                 <p>Минимальная стоимость банкета</p>
                 <p className={styles.slider_text_data}>
-                  {area.min_price_banquet} ₽
+                  {area.min_price_banquet}₽
                 </p>
               </div>
               <div className={styles.slider_text}>

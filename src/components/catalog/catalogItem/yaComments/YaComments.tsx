@@ -6,6 +6,7 @@ type YaCommentsProps = {
 
 function YaComments({ id }: YaCommentsProps) {
   const containerStyle: CSS.Properties = {
+    marginTop: '40px',
     maxWidth: '560px',
     height: '800px',
     overflow: 'hidden',
