@@ -264,6 +264,11 @@ $fi-discord: '\e9fe';
 $fi-tiktok: '\e9ff';
 $fi-education: '\ea00';
 $fi-code: '\ea01';
+$fi-motor-ship: '\ea02';
+$fi-sailboat: '\ea03';
+$fi-tent: '\ea04';
+$fi-umbrella: '\ea05';
+$fi-castle: '\ea06';
 
 
 // Icons styles
@@ -1575,5 +1580,30 @@ $fi-code: '\ea01';
 .fi-code {
   &:before {
     content: $fi-code; 
+  }
+}
+.fi-motor-ship {
+  &:before {
+    content: $fi-motor-ship; 
+  }
+}
+.fi-sailboat {
+  &:before {
+    content: $fi-sailboat; 
+  }
+}
+.fi-tent {
+  &:before {
+    content: $fi-tent; 
+  }
+}
+.fi-umbrella {
+  &:before {
+    content: $fi-umbrella; 
+  }
+}
+.fi-castle {
+  &:before {
+    content: $fi-castle; 
   }
 }

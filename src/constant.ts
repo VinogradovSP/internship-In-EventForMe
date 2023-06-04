@@ -1,4 +1,4 @@
-import { url } from "inspector";
+export const URL = "http://letarist.pythonanywhere.com/api/test_api/";
 
 // для футера
 export type FooterConst = {

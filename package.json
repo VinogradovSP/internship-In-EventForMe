@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@pbe/react-yandex-maps": "^1.2.4",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.15.11",
     "@types/react": "18.0.31",
     "@types/react-dom": "18.0.11",
+    "all": "^0.0.0",
     "bootstrap": "^5.2.3",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
@@ -35,7 +37,7 @@
     "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-bootstrap": "^2.7.0",
-    "react-datepicker": "^4.8.0",
+    "react-datepicker": "^4.11.0",
     "react-dom": "18.2.0",
     "react-filepond": "^7.1.2",
     "react-leaflet": "^4.2.0",
@@ -53,6 +55,8 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@types/react-datepicker": "^4.10.0",
+    "@yandex/ymaps3-types": "^0.0.5",
     "autoprefixer": "^10.4.13",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",

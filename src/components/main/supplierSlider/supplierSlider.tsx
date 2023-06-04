@@ -16,7 +16,7 @@ function SupplierSlider(): JSX.Element {
     return (
         <Container as='section' className="mx-auto w-75">
             <section className={styles.my124 + ' pt-2 pt-sm-0 pb-md-2'}>
-                <MainTitle title={'Нам доверяют'} suptitle={'Только проверенные исполнители и площадки'}/>
+                <MainTitle suptitle={'Нам доверяют'} title={'Только проверенные исполнители и площадки'}/>
 
                 <div className='d-sm-flex align-items-center justify-content-between mb-4'>
                     <h3 className={styles.main__subtitle + ' h3 mb-sm-0'}>Лучшие исполнители</h3>
@@ -26,6 +26,7 @@ function SupplierSlider(): JSX.Element {
                 <div className='position-relative'>
                     <Swiper
                         modules={[Navigation]}
+                        // loop={true}
                         navigation={{
                             prevEl: '#prev',
                             nextEl: '#next'
@@ -38,6 +39,7 @@ function SupplierSlider(): JSX.Element {
                             1300: {slidesPerView: 4}
                         }}
                         className='mx-n2'
+                        data-carousel-options='{"loop": true}'
                     >
                         {suppliers.map((supplier, index) => (
                             <SwiperSlide key={index} className='h-auto'>

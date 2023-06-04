@@ -12,7 +12,7 @@ function PlanWeddingCard() {
         <section className={styles.my124}>
             <Container as='section'>
 
-                        <MainTitle title={'Портал EventForMe'} suptitle={'Организуйте свадьбу с нашей помощью и создайте воспоминания на всю жизнь'}>
+                        <MainTitle suptitle={'Портал EventForMe'} title={'Организуйте свадьбу с нашей помощью и создайте воспоминания на всю жизнь'}>
                             <Button size='lg'>
                                 <Link href='#' className={styles.btn__link}>
                                     Начать планирование

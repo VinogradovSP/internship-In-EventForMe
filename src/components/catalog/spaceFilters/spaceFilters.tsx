@@ -8,7 +8,7 @@ import styles from '@/styles/catalog/Catalog.module.scss';
 function SpaceFilters() {
 
     return (
-        <FormGroup className='d-block'>
+        <FormGroup className='d-block my-4'>
             <Row className='g-0 ms-sm-n2'>
                 <Col className='d-sm-flex align-items-center'>
 

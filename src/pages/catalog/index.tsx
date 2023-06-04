@@ -15,39 +15,10 @@ export default function Catalog() {
         <Breadcrumb.Item active>Каталог</Breadcrumb.Item>
       </Breadcrumb>
       <Row>
-        <Sidebar />
+        <h2>Корневая страница каталога</h2>
       </Row>
       
 
     </Container>
   )
-}
-
-
-
-//Это специальная функция next для запросов на стороне сервере. Ее наличие обеспечивает ssr:
-export async function getServerSideProps() {
-  const url = 'https://jsonplaceholder.typicode.com/users';
-  const response = await fetch(url, {
-    headers: {
-      Accept: 'application/json',
-    },
-  });
-  const data = await response.json();
-
-  if (!data) {
-    return {
-      notFound: true,
-    }
-  }
-
-  // так можно обращаться к стору прямо из специальных функций Next, но это не рекомендуется
-  //Лучше получать данные в компоненте через props и затем диспатчить их в стор из самого компонета.
-  // store.dispatch(fetchUsers());
-
-  return {
-    props: {
-      items: data
-    },
-  };
 }

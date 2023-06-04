@@ -2,29 +2,31 @@ import React from 'react';
 import Image from 'next/image';
 import styles from '@/styles/header/Avatar.module.scss';
 
+
 type AvatarProps = {
-    role: string,
-    first_name: string,
-    second_name: string,
-    avatar: string,
+    name?: string,
+    surname?: string,
+    avatar?: string,
+    is_bride?: boolean,
 }
 
-function Avatar({ role, first_name, second_name, avatar }: AvatarProps) {
+function Avatar({ is_bride, name, surname, avatar }: AvatarProps) {
+    let path = '/';
+
     //на тот случай, если путь к ЛК будет меняться в зависимости от роли
-    let path = '';
-    switch (role) {
-        case 'bride':
+    switch (is_bride) {
+        case true:
             path = '#';
             break;
-        case 'provider':
+        case false:
             path = '#';
             break;
     }
-    
+
     return (
         <a href={path} className={styles.avatar__link}>
-            <Image src={avatar? avatar : '/img/header/avatar.svg'}  width={40} height={40} alt='avatar' />
-            <p className={styles.avatar__name}>{first_name}&nbsp;{second_name}</p>
+            <Image className={styles.avatar__image} src={avatar || '/img/header/avatar.svg'} width={40} height={40} alt='avatar' />
+            <p className={styles.avatar__name}>{name || 'Джейн'}&nbsp;{surname || 'Доу'}</p>
         </a>
     )
 }

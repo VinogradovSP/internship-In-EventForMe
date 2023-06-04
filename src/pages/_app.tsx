@@ -1,4 +1,5 @@
 import SSRProvider from 'react-bootstrap/SSRProvider';
+import { YMaps } from '@pbe/react-yandex-maps';
 import Layout from '@/components/layout/Layout';
 import type { AppProps } from 'next/app';
 import { store } from '@/store';
@@ -25,11 +26,18 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta name='msapplication-TileColor' content='#766df4' />
           <meta name='theme-color' content='#ffffff' /> */}
         </Head>
-        <Layout>
-          <main>
-            <Component {...pageProps} />
-          </main>
-        </Layout>
+        <YMaps
+          query={{
+            lang: 'ru_RU',
+            apikey: 'здесь ключ'
+          }}
+        >
+          <Layout>
+            <main>
+              <Component {...pageProps} />
+            </main>
+          </Layout>
+        </YMaps>
       </SSRProvider>
     </Provider>
   )

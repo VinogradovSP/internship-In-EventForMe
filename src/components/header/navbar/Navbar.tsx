@@ -1,23 +1,25 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/store/user/userSlice';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import { useRouter } from 'next/router';
 import CatalogDropDown from '../catalogDropDown/CatalogDropDown';
 import City from '../city/city';
 import RegButton from '../regButton/regButton';
 import Login from '../login/Login';
-import Search from '../search/Search';
-import styles from '@/styles/header/Navbar.module.scss';
 import Avatar from '../avatar/Avatar';
+import styles from '@/styles/header/Navbar.module.scss';
+
 
 type HeaderNavbarProps = {
     isAuth: boolean,
 }
 
 function HeaderNavbar({ isAuth }: HeaderNavbarProps) {
-    const { pathname } = useRouter();
+    const user = useSelector(selectUser);
+
     const navigation = [
         {
             id: 1,
@@ -40,7 +42,7 @@ function HeaderNavbar({ isAuth }: HeaderNavbarProps) {
             text: 'Блог'
         },
     ]
-
+    
     function renderNavigation() {
         return navigation.map(({ id, path, text }) => (
             <Nav.Item key={id}>
@@ -71,7 +73,7 @@ function HeaderNavbar({ isAuth }: HeaderNavbarProps) {
                         {!isAuth &&<RegButton />}
 
                         {/* {isAuth && <Search />} */}
-                        {isAuth && <Avatar role={'bride'} first_name={'Имя'} second_name={'Фамилия'} avatar={''}/>}
+                        {isAuth && <Avatar is_bride={user?.is_bride} name={user?.name} surname={user?.surname} avatar={user?.avatar}/>}
 
                     </Nav>
                 </Navbar.Collapse>

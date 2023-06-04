@@ -9,7 +9,7 @@ type TitleProps = {
 
 function Title({ title, quantity }: TitleProps): JSX.Element {
     return (
-        <section className={styles.catalog__title}>
+        <section className={`${styles.catalog__title} my-3`}>
             <h2>{title}</h2>
             <div className={styles.catalog__title_content}>
                 <div className={styles.catalog__title_text}>

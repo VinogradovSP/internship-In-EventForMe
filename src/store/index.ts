@@ -4,7 +4,7 @@ import {rootReducer} from './reducer'
 
 export const store = configureStore({
     reducer: rootReducer,
-     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 // Кастомные типы для стора и диспатча:

@@ -1,50 +1,54 @@
 import Link from 'next/link';
 import Nav from 'react-bootstrap/Nav';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useRouter } from 'next/router';
 
 
 function CatalogDropDown() {
+    let path = useRouter().pathname;
+    let inCatalog= (/^\/catalog/.test(path));
+
     const catalogItems = [
         {
             id: 1,
-            path: '#',
+            path: 'dresses',
             text: 'Свадебные платья'
         },
         {
             id: 2,
-            path: '#',
+            path: 'places',
             text: 'Площадки'
         },
         {
             id: 3,
-            path: '#',
+            path: 'hosts',
             text: 'Ведущие'
         },
         {
             id: 4,
-            path: '#',
+            path: 'photo',
             text: 'Фотографы'
         },
         {
             id: 5,
-            path: '#',
+            path: 'video',
             text: 'Видеографы'
         },
         {
             id: 6,
-            path: '#',
+            path: 'music',
             text: 'Музыканты'
         },
         {
             id: 7,
-            path: '#',
+            path: 'style',
             text: 'Стилисты'
         },
     ]
 
     function renderItems() {
         return catalogItems.map(({ id, path, text }) => (
-            <Dropdown.Item key={id} as={Link} href={path}>
+            <Dropdown.Item key={id} as={Link} href={inCatalog? path :'catalog/' + path}>
                 {text}
             </Dropdown.Item>
         ))
@@ -52,7 +56,7 @@ function CatalogDropDown() {
 
     return (
         <Nav.Item as={Dropdown}>
-            <Dropdown.Toggle as={Nav.Link} href='/catalog'>Каталог</Dropdown.Toggle>
+            <Dropdown.Toggle as={Nav.Link}>Каталог</Dropdown.Toggle>
             <Dropdown.Menu renderOnMount>
                 {renderItems()}
             </Dropdown.Menu>

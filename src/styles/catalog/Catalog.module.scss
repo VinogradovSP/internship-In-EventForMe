@@ -50,3 +50,27 @@
     align-items: center;
     color: #9691A4;
 }
+
+
+.anchor__btns {
+    display: flex;
+    gap: 20px;
+}
+
+.anchor__btn {
+    border: none;
+    background-color: unset;
+    &:hover {
+    background-color: #primary;
+  }
+}
+.anchor__btn_link {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    color: #9691A4;
+    text-decoration: none;
+    &:hover {
+        color: #ffffff;
+    }
+  }

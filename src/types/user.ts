@@ -2,6 +2,8 @@
 export type User = {
     id: number,
     name: string,
-    username: string,
-    email: string,
+    surname: string,
+    patronymic?: string,
+    avatar?:	string,
+    is_bride: boolean,
   }

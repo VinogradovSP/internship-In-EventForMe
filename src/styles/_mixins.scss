@@ -16,3 +16,16 @@
     );
   }
 }
+
+// по сути тотже миксин, что и выше, только применяется к разным св-вам
+
+// можно применять для адаптива к разным свойсва в коде пишем, допустим:
+// @include adaptiv-value('margin-top', 124, 10);
+// при этом верхний отступ будет стремится от 124 до 10 px. в зависимости от р-ра экрана
+// или тотже font-size
+// @include adaptiv-value('font-size', 16, 9);
+
+@mixin adaptiv-value($property, $startSize, $minSize){
+  $addSize: $startSize - $minSize;
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$max-width - 320}));
+}

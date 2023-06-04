@@ -1,7 +1,7 @@
 @import '@/styles/_mixins';
 
-.my64 {
-    margin: 64px 0;
+.py64 {
+    padding: 64px 0;
 }
 
 .my124 {
@@ -48,4 +48,121 @@
     @include fz(9,20);
     font-weight: 500;
     line-height: 30px;
+}
+.more_services {
+    &__description {
+        @include fz(9,18);
+        color: $grey;
+    }
+}
+
+.step {
+    &__title {}
+    &__description {
+        margin: 0;
+    }
+}
+.grid {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr 0.5fr;
+    height: 30em;
+    gap: 1.5em;
+}
+
+.locations {
+    &_wrapper {
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        transition: $transition;
+
+        &_1 {
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        &:hover {
+            //box-shadow: 0 0.125rem 0.125rem -0.125rem rgba(31, 27, 45, 0.08), 0 0.25rem 0.75rem rgba(31, 27, 45, 0.08);
+
+            & .locations__icon_wrapper {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        text-decoration: none;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(31, 27, 45, 0) 0%, rgba(31, 27, 45, 0.1) 26.56%, rgba(31, 27, 45, 0.28) 42.71%, rgba(31, 27, 45, 0.48) 56.77%, rgba(31, 27, 45, 0.68) 72.4%,
+                rgba(31, 27, 45, 0.85) 86.98%, rgba(31, 27, 45, 0.94) 100%);
+    }
+
+    &__icon {
+        color: $primary;
+        background: $white;
+
+        &:hover {
+            background: $primary;
+            color: $white;
+        }
+
+        &_wrapper {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0;
+            transition: $transition;
+        }
+    }
+
+    &__description {
+        color: $white;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+}
+
+.overlay_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+}
+
+.description {
+    &__title {
+        color: $white;
+        @include fz(9,20);
+        font-weight: 700;
+        margin: 0;
+    }
+
+    &__text {
+        @include fz(7,12);
+        color: $grey;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__star {
+        color: $star;
+    }
+}
+
+.fw_bold {
+    font-weight: 700;
 }
