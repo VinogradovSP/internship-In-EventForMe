@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 import ImageLoader from '@/components/_finder/ImageLoader';
 import { PlaceCardType } from '@/types/catalog';
 import styles from '@/styles/catalog/places/Places.module.scss';
+import { numberOfAreas } from '@/services/parse.service';
 
 type PlaceCardProps = {
   place: PlaceCardType;
@@ -65,11 +66,8 @@ function PlaceCard({ place }: PlaceCardProps) {
 
         <hr className="text-secondary" />
         <Card.Footer className="d-flex align-items-center justify-content-evenly px-0 text-center">
-          <span>3 банкетных зала</span>
-          <span className="fs-4 text-secondary">|</span>
-          <span>2 шатра</span>
-          <span className="fs-4 text-secondary">|</span>
-          <span>2 веранды</span>
+          
+          <span>{place.areas.length} {numberOfAreas(place.areas.length)}</span>
         </Card.Footer>
       </Card.Body>
     </Card>

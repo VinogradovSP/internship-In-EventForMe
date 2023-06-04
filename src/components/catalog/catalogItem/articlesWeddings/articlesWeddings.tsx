@@ -1,20 +1,14 @@
+import { useState } from 'react';
 import ImageLoader from '@/components/_finder/ImageLoader';
-import { FC, useState } from 'react';
-import 'react-datepicker/dist/react-datepicker.css';
 
-export type cardsType = {
+type  ArticlesWeddingsProps = {
   title: string;
   description: string;
   pathImg: string;
   dateText: string;
 };
 
-export const ArticlesWeddings: FC<cardsType> = ({
-  title,
-  description,
-  pathImg,
-  dateText,
-}) => {
+function ArticlesWeddings ({ title, description, pathImg, dateText}: ArticlesWeddingsProps) {
   //* для дополнительного текста
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const new_description = description.slice(0, 120) + '...';
@@ -71,3 +65,5 @@ export const ArticlesWeddings: FC<cardsType> = ({
     </figure>
   );
 };
+
+export default ArticlesWeddings;

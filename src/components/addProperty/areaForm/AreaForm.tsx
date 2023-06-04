@@ -1,10 +1,4 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Col, Dropdown, InputGroup, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
@@ -13,12 +7,7 @@ import FileUploader from '../fileUploader/FileUploader';
 import AreaFormDatePicker from './AreaFormDatePicker';
 import DetailsTextarea from '../detailsTextarea/DetailsTextarea';
 import { Area } from '@/types/areaType';
-import {
-  ADD_PLACE_NAMES,
-  COLOR_HALL,
-  SCHEME_OF_PAYMENT,
-  TYPE_AREA,
-} from '@/constant';
+import { ADD_PLACE_NAMES, COLOR_HALL, SCHEME_OF_PAYMENT, TYPE_AREA } from '@/constant';
 import styles from '@/styles/addproperty/AreaForm.module.scss';
 
 type AreaFormProps = {
@@ -41,51 +30,44 @@ function AreaForm({ index, areas, setAreas }: AreaFormProps) {
     deposit: 0,
     detail_location: '',
     scheme_of_payment: '',
-    reserved_dates: [],
+    reserved_days: [],
     area_img: [],
     bare_lease: false,
   };
   const [area, setArea] = useState<Area>(initialAreaFormState);
-  //обработчик для стандартных инпутов type=text
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setArea({ ...area, [e.target.name]: e.target.value });
   }
-  //обработчик для стандартных инпутов type=number
   function handleNumberChange(e: ChangeEvent<HTMLInputElement>) {
     setArea({ ...area, [e.target.name]: +e.target.value });
   }
-  // тип (any пришлось поставить из-за Бутсрапа)
+  // any из-за Бутсрап
   const [selectedType, setSelectedType] = useState<string>('');
   function handleTypeSelect(eventKey: any, e: any) {
     setArea({ ...area, ['type_area']: eventKey });
     setSelectedType(e.target.name);
   }
-  // цвет
   const [selectedColor, setSelectedColor] = useState<string>('');
   function handleColorSelect(eventKey: any, e: any) {
     setArea({ ...area, ['color_hall']: eventKey });
     setSelectedColor(e.target.name);
   }
-  // схема оплаты
   const [selectedScheme, setSelectedScheme] = useState<string>('');
   function handleSchemeSelect(eventKey: any, e: any) {
     setArea({ ...area, ['scheme_of_payment']: eventKey });
     setSelectedScheme(e.target.name);
   }
-  // даты брони
   function handleDateChange(date: Date, id: number) {
-    let newArr = [...area.reserved_dates];
+    let newArr = [...area.reserved_days];
     if (newArr[id] && date === null) {
       newArr.splice(id, 1);
     } else {
       newArr[id] = date;
     }
-    setArea({ ...area, ['reserved_dates']: newArr });
+    setArea({ ...area, ['reserved_days']: newArr });
   }
 
-  // Загрузка картинок
   const [areaImg, setAreaImg] = useState<string[]>([]);
-
   useEffect(() => {
     setArea((prev) => ({
       ...prev,
@@ -93,12 +75,13 @@ function AreaForm({ index, areas, setAreas }: AreaFormProps) {
     }));
   }, [areaImg]);
 
-  //при изменении объекта Площадки - прокидываем в общий список мест
   useEffect(() => {
     let newAreasArr = [...areas];
     newAreasArr[index] = area;
     setAreas(newAreasArr);
   }, [area]);
+
+  console.log (area);
 
   return (
     <>
@@ -320,7 +303,7 @@ function AreaForm({ index, areas, setAreas }: AreaFormProps) {
               placeholder="от 10 000"
               type="number"
               min="10000"
-              value={area.deposit || undefined}
+              value={area.deposit || ''}
               onChange={handleNumberChange}
               className={styles.capacity__input}
               required
@@ -387,12 +370,12 @@ function AreaForm({ index, areas, setAreas }: AreaFormProps) {
       </Row>
       {/* Недоступные даты */}
       <Row>
-        <Form.Group controlId="reserved_dates">
+        <Form.Group controlId="reserved_days">
           <Form.Label className="d-block fw-bold mb-2 mt-2 pb-1">
             Отметьте даты, на которые бронь зала уже недоступна
           </Form.Label>
           <AreaFormDatePicker
-            datesArray={area.reserved_dates}
+            datesArray={area.reserved_days}
             handleDateChange={handleDateChange}
           />
         </Form.Group>

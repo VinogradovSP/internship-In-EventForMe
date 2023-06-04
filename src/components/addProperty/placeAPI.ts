@@ -56,6 +56,8 @@ export async function createPlace(data: Place, token: string) {
 
 export async function createArea(area: Area, placeId: number, token: string) {
     area.place_id = placeId;
+    // @ts-expect-error: ВРЕМЕННО пока на бэке неверный формат данных
+    area.reserved_days =  "2023-05-14";
     //ВРЕМЕННО пока этого свойства нет на бэке
     delete area.bare_lease;
 

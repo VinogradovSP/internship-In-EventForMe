@@ -72,7 +72,7 @@ export const FEATURES = [
   [10, 'Фотозона'],
 ];
 
-export const TERRITORY = [
+export const TERRITORY: [number, string][] = [
   [1, 'Своя парковка'],
   [2, 'Welcome-зона'],
   [3, 'Место под фаер-шоу'],

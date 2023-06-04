@@ -14,7 +14,7 @@ import 'lightgallery/css/lg-thumbnail.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-fullscreen.css';
 import 'lightgallery/css/lg-video.css';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import DatePicker from 'react-datepicker';
 // import { addDays } from 'date-fns';
@@ -22,7 +22,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import CloseButton from 'react-bootstrap/CloseButton';
-import { Area, AreaImages } from '@/types/areaType';
+import { AreaRecieved, AreaImages } from '@/types/areaType';
 import {
   COLOR_HALL,
   SCHEME_OF_PAYMENT,
@@ -30,7 +30,7 @@ import {
 } from '@/constant';
 
 type PlaceAreasProps = {
-  areas: Area[];
+  areas: AreaRecieved[];
   average_check: number;
 };
 
@@ -45,7 +45,7 @@ function PlaceAreas({ areas, average_check }: PlaceAreasProps): JSX.Element {
 }
 
 type PlaceAreaProps = {
-  area: Area;
+  area: AreaRecieved;
   average_check: number;
 };
 
@@ -130,28 +130,6 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
       return a.toUpperCase();
     });
   }
-
-  // для избежания дублирования кода, т.к. я еще сюда обложку добавляю
-  const swiperSlideRender = (img: AreaImages | string, indx?: number) => {
-    const newImage = typeof img === 'string' ? img : img?.image;
-    return (
-      <SwiperSlide key={indx}>
-        <GalleryItem
-          href={newImage}
-          thumb={[newImage, 313, 230]}
-          data-external-thumb-image={newImage}
-          imgAlt={area.title}
-          className={`${indx === 0 ? styles.rounded_left : ''}${
-            indx === area.images_area.length - 1 ? styles.rounded_right : ''
-          }  `}
-          light={false}
-          caption=""
-          video={false}
-        />
-      </SwiperSlide>
-    );
-  };
-
   //для красивого вывода данных из дропдаунов формы добавления
   const findTitle = (dictionary: string[][], value: string): string => {
     const title = dictionary.find((item: string[]) => item[0] === value);
@@ -160,14 +138,24 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
 
     return title[1];
   };
+  const [photos, setPhotos] = useState<string[]>([]);
+  useEffect(() => {
+    combinePhotos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const combinePhotos = () => {
+    const emptyPhoto = '/img/emptyPhoto.png';
+    const imageArray = area.images_area.map((img) => img.image);
+    if (area.cover_area) imageArray.unshift(area.cover_area);
+    if (imageArray.length === 2) setPhotos([...imageArray, emptyPhoto]);
+    else setPhotos(imageArray);
+  };
 
   return (
     <>
       <section
-        className={
-          'card card-body border-0 shadow-sm card-hover ' +
-          styles.catalog_item_slider
-        }
+        className={'card card-body border-0 shadow-sm card-hover mb-xl-5 mb-4'}
       >
         <h4 className="h4 text-weight-bold">{capitalize(area.title)}</h4>
         <div className="d-flex mb-3" style={{ fontWeight: '500' }}>
@@ -246,79 +234,85 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
             </div>
           </div>
         </div>
-        {(area.images_area.length || area.cover_area) && (
+        {/* иначе видно 0 */}
+        {photos.length > 0 && (
           <LightGallery
             selector=".gallery-item"
-            // licenseKey={
-            //   process.env.NODE_ENV === 'production'
-            //     ? process.env.NEXT_PUBLIC_LG
-            //     : undefined
-            // }
             plugins={[lgThumbnail, lgZoom, lgFullScreen]}
             zoomFromOrigin={true}
             exThumbImage="data-external-thumb-image"
           >
             <div className="position-relative">
-              {area.images_area.length ? (
-                <>
-                  <Swiper
-                    modules={[Navigation]}
-                    navigation={{
-                      prevEl: '#prev',
-                      nextEl: '#next',
-                    }}
-                    spaceBetween={12}
-                    breakpoints={{
-                      0: { slidesPerView: 1 },
-                      500: { slidesPerView: 2 },
-                      850: { slidesPerView: 3 },
-                    }}
-                    data-carousel-options='{"loop": true}'
-                    onSlideChange={(swiper) => {
-                      setCurrentSlide(swiper.realIndex + 1 + 2);
-                    }}
-                    onInit={(swiper) => {
-                      setCurrentSlide(swiper.realIndex + 1 + 2);
-                      setTotalSlides(swiper.slides.length);
-                    }}
-                  >
-                    {swiperSlideRender(area.cover_area)}
-                    {area.images_area.map((img, indx) =>
-                      swiperSlideRender(img, indx)
-                    )}
-                    {area.images_area.length > 2 && <SlidesCount />}
-                  </Swiper>
+              <Swiper
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: '#prev',
+                  nextEl: '#next',
+                }}
+                spaceBetween={12}
+                breakpoints={{
+                  0: { slidesPerView: 1 },
+                  500: { slidesPerView: 2 },
+                  850: { slidesPerView: 3 },
+                }}
+                data-carousel-options='{"loop": true}'
+                onSlideChange={(swiper) => {
+                  setCurrentSlide(swiper.realIndex + 1 + 2);
+                }}
+                onInit={(swiper) => {
+                  setCurrentSlide(swiper.realIndex + 1 + 2);
+                  setTotalSlides(swiper.slides.length);
+                }}
+              >
+                {photos.length === 1 ? (
+                  <GalleryItem
+                    href={photos[0]}
+                    thumb={[photos[0], 900, 230]}
+                    data-external-thumb-image={photos[0]}
+                    imgAlt={area.title}
+                    light={false}
+                    caption=""
+                    video={false}
+                    className="w-100"
+                  />
+                ) : (
+                  photos.map((img, indx) => (
+                    <SwiperSlide key={indx}>
+                      <GalleryItem
+                        href={img}
+                        thumb={[img, 313, 230]}
+                        data-external-thumb-image={img}
+                        imgAlt={area.title}
+                        className={`${indx === 0 ? styles.rounded_left : ''}${
+                          indx === photos.length - 1 ? styles.rounded_right : ''
+                        }  `}
+                        light={false}
+                        caption=""
+                        video={false}
+                      />
+                    </SwiperSlide>
+                  ))
+                )}
+                {photos.length > 3 && <SlidesCount />}
+              </Swiper>
 
-                  <Button
-                    id="prev"
-                    variant="prev"
-                    className="d-none d-sm-block ms-4"
-                  />
-                  <Button
-                    id="next"
-                    variant="next"
-                    className="d-none d-sm-block me-4"
-                  />
-                </>
-              ) : (
-                <GalleryItem
-                  href={area.cover_area}
-                  thumb={[area.cover_area, 807, 230]}
-                  data-external-thumb-image={area.cover_area}
-                  imgAlt={area.title}
-                  light={false}
-                  caption=""
-                  video={false}
-                  className="w-100"
-                />
-              )}
+              <Button
+                id="prev"
+                variant="prev"
+                className="d-none d-sm-block ms-4"
+              />
+              <Button
+                id="next"
+                variant="next"
+                className="d-none d-sm-block me-4"
+              />
             </div>
           </LightGallery>
         )}
 
         <div className={styles.slider_text_wrapper}>
           <div className="d-md-flex">
-            <div className={styles.left_block}>
+            <div className={styles.left_block + ' me-0 me-md-4'}>
               <div className={styles.slider_text}>
                 <p>Вместимость</p>
                 <p className={styles.slider_text_data}>
@@ -373,7 +367,11 @@ function PlaceArea({ area, average_check }: PlaceAreaProps): JSX.Element {
 
           <div className={styles.slider_text_bottom + ' d-md-flex'}>
             {area.sale && (
-              <div className={styles.sale + ' order-2 my-4 ms-md-3'}>
+              <div
+                className={
+                  styles.sale + ' order-2 my-4 ms-md-3 mx-auto w-75 w-md-auto'
+                }
+              >
                 {/* //! в форме заполнения помещения нет соответствующего поля */}
                 {/* <p className="fw-semibold">{place.sale.condition}</p> */}
 

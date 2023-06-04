@@ -8,7 +8,7 @@ import styles from '@/styles/footer/Footer.module.scss';
 import Button from 'react-bootstrap/Button';
 
 export default function Footer() {
-  function renderRow(rowData: FooterType, button: boolean): JSX.Element {
+  function renderRow(rowData: FooterType): JSX.Element {
     return (
       <div className={styles.footer_row + ' mb-sm-0 mb-4'}>
         <h4 className="h5 d-flex flex-column align-items-center d-md-block">
@@ -27,16 +27,6 @@ export default function Footer() {
               </Nav.Link>
             </Nav.Item>
           ))}
-          {/* {button && (
-            <Nav.Link
-              className={styles.footer__catalog_btn}
-              as={Link}
-              href="#"
-              active={false}
-            >
-              <Button>Хочу быть в каталоге</Button>
-            </Nav.Link>
-          )} */}
         </Nav>
       </div>
     );
@@ -135,16 +125,22 @@ export default function Footer() {
               styles.footer_rows + ' w-100 w-md-75 justify-content-md-between'
             }
           >
-            {renderRow(SERVICES, false)}
+            {renderRow(SERVICES)}
 
-            {renderRow(PAGES, false)}
+            {renderRow(PAGES)}
 
-            {renderRow(PLACES, false)}
+            {renderRow(PLACES)}
 
-            {renderRow(ACTORS, true)}
+            {renderRow(ACTORS)}
           </div>
         </div>
-        <Button className="d-flex mx-auto me-md-0">Хочу быть в каталоге</Button>
+        <Nav.Link
+          as={Link}
+          href="/addproperty"
+          active={false}
+        >
+          <Button className="d-flex mx-auto me-md-0">Хочу быть в каталоге</Button>
+        </Nav.Link>
 
         {/* Copyright */}
         <div className={styles.footer_copyright + ' align-items-center'}>

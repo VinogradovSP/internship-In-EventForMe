@@ -1,4 +1,4 @@
-export type cardsType = {
+export type CardsType = {
   title: string,
   description: string,
   pathImg: string
