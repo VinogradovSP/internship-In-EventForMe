@@ -1,15 +1,26 @@
 .regbtn {
-  margin-left: 16px;
+  margin-left: 32px;
 }
 .regbtn__text {
   font-style: normal;
+  text-decoration: none;
   font-weight: 700;
   font-size: 14px;
   line-height: 150%;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   display: flex;
   gap: 10px;
+  &:hover {
+    color: #ffffff;
+  }
+}
+@media (max-width: 991px) {
+  .regbtn {
+    margin-left: 0px;
+    margin-top: 12px;
+    max-width: 150px;
+  }
 }

@@ -1,9 +1,9 @@
 import Sidebar from "@/components/catalog/sidebar/Sidebar";
 import Link from "next/link";
+import { Row, Col } from "react-bootstrap";
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-
+import { Paths } from "@/constant";
 
 export default function Catalog() {
 
@@ -11,13 +11,15 @@ export default function Catalog() {
     <Container>
 
       <Breadcrumb className='breadcrumb'>
-        <Breadcrumb.Item linkAs={Link} href='/'>Главная</Breadcrumb.Item>
+        <Breadcrumb.Item linkAs={Link} href={Paths.Home}>Главная</Breadcrumb.Item>
         <Breadcrumb.Item active>Каталог</Breadcrumb.Item>
       </Breadcrumb>
       <Row>
-        <h2>Корневая страница каталога</h2>
+        <Sidebar />
+        <Col>
+          <h2>Корневая страница каталога</h2>
+        </Col>
       </Row>
-      
 
     </Container>
   )

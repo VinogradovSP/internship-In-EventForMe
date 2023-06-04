@@ -1,14 +1,28 @@
 import { ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
 import Form from 'react-bootstrap/Form';
 
 type SortingProps = {
-    sortingCB: (param: string) => void;
+    query: string;
 }
 
-function Sorting({ sortingCB }: SortingProps) {
-
+function Sorting({ query }: SortingProps) {
+    const router = useRouter();
     function handleChoice(e: ChangeEvent<HTMLSelectElement>) {
-        sortingCB(e.target.value);
+        if (e.target.value ==="ASC") {
+            query === '' ?
+            router.push(`/catalog/places?ordering=average_check`)
+            :
+            router.push(`/catalog/places${query}&ordering=average_check`)
+
+        } else if ( e.target.value ==="DESC" ) {
+            query === '' ?
+            router.push(`/catalog/places?ordering=-average_check`)
+            :
+            router.push(`/catalog/places${query}&ordering=-average_check`)
+        } else {
+            router.push('/catalog/places')
+        }
     }
 
     return (
@@ -20,9 +34,12 @@ function Sorting({ sortingCB }: SortingProps) {
                 </Form.Label>
                 <Form.Select size='sm' onChange={handleChoice}>
                     <option value='none'>-----</option>
-                    <option value='popularity'>Популярности</option>
-                    <option value='lowPrice'>Цена (от низкой к высокой)</option>
-                    <option value='hightPrice'>Цена (от высокой к низкой)</option>
+                    <option value='ASC'>
+                        Цена (от низкой к высокой)
+                    </option>
+                    <option value='DESC'>
+                        Цена (от высокой к низкой)
+                    </option>
                 </Form.Select>
             </Form.Group>
         </div>

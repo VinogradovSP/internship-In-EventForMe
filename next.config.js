@@ -7,18 +7,12 @@ const nextConfig = {
 
 module.exports = {
   images: {
-
-
-    domains: ['picsum.photos', "dummyimage.com", "placekitten.com", 'jsonplaceholder.typicode.com' ]
-  },
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "placekitten.com",
-        port: "",
-        pathname: "/**",
-      },
+    domains: [
+      '188.225.24.70',
+      'picsum.photos',
+      'dummyimage.com',
+      'placekitten.com',
+      'jsonplaceholder.typicode.com',
     ],
   },
 };
-

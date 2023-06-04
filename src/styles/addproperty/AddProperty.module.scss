@@ -1,0 +1,31 @@
+.address__dropdown{
+  position: absolute;
+  z-index: 10;
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.checked {
+  &:hover {
+    color: #674FA3;
+    font-weight: 600;
+  }
+}
+
+.numbers_input__row {
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
+  .numbers_input__col{
+    max-width: 250px;
+    margin-bottom: 15px;
+    &_border{
+      border-radius: 10px 0 0 10px !important;
+      border-right: transparent;
+    }
+  }
+}
+

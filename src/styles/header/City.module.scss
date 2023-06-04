@@ -8,51 +8,33 @@
   display: flex;
 }
 
-.city__text {
-  display: flex;
-  gap: 11px;
-  border-right: 1px solid #D5D2DC;
-  align-items: center;
-  text-align: center;
-  padding-left: 16px;
-  padding-right: 16px;
-  width: max-content;
-}
-
-.city__name {
-  font-style: normal;
+.city__input {
+  border: none;
+  width: 150px;
+  padding-left: 10px;
   font-weight: 700;
   font-size: 14px;
   line-height: 150%;
-  color: #1F1B2D;
-  margin: 0;
+  color: #454056;
+  outline:none;
 
-}
-
-.city__input {
-  border: none;
-  width: 250px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 150%;
-  padding-left: 12px;
   &::placeholder {
     font-weight: 500;
     font-size: 14px;
     line-height: 150%;
     color: #674FA3;
-    padding-left: 12px;
   }
 }
 
-.city__dropdown{
-  top: 36px;
-  right: 0px;
+.city__dropdown {
+  top: 34px;
+  left: 0px;
   position: absolute;
   z-index: 10;
   background-color: #ffffff;
   padding: 12px;
   border-radius: 10px;
+
   @media (max-width: 990px) {
     top: 24px;
   }

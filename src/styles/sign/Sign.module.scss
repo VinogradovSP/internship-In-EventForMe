@@ -1,0 +1,29 @@
+@import '@/styles/_mixins';
+
+.btn_primary {
+  svg {
+    fill: $primary;
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.toggle_btn {
+  font-weight: 700;
+  @include fz(10, 14);
+}
+
+.auth__container {
+  height: 30vh;
+  text-align: center;
+}
+
+.auth__spinner {
+  margin-top: 36px;
+}
+
+.socialMedia {
+  @include fz(12, 16);
+}

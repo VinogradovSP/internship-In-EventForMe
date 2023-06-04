@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 function CatalogDropDown() {
     let path = useRouter().pathname;
-    let inCatalog= (/^\/catalog/.test(path));
+    let inCatalog= (/^\/catalog\//.test(path));
 
     const catalogItems = [
         {

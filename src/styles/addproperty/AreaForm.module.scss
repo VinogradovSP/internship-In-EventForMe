@@ -1,0 +1,29 @@
+@media (max-width: 600px) {
+    .group_container {
+        flex-direction: column;
+    }
+}
+
+.capacity__group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.capacity__img {
+    width: 32px;
+    height: 1px;
+}
+
+.capacity__input {
+    min-width: 115px;
+}
+
+.dropdown__item {
+    min-width: 118px;
+}
+
+.radio__item {
+    display: flex;
+    gap: 10px;
+}

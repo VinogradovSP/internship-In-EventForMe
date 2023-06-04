@@ -41,8 +41,8 @@ export default function AnchorBtns() {
     <div className={styles.anchor__btns}>
       {
         anchorList.map(({ id, text, anchor }) => (
-          <Button key={id} className={styles.anchor__btn}>
-            <Link href={anchor} className={styles.anchor__btn_link}>{text}</Link>
+          <Button href={anchor} key={id} className={styles.anchor__btn}>
+            {text}
           </Button>
         ))
       }

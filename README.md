@@ -23,3 +23,15 @@ Types - для описания типов TS, в файле user - пример
 Основные настройки: _variables.scss
 
 4. Файл constant.ts - временный файл для описания констант (url и т.п.) Затем перенесем всю информацию в .env
+
+5. Добавленные иконки:
+    fi-motor-ship - теплоход
+    fi-sailboat - яхта
+    fi-tent - шатёр
+    fi-umbrella - зонт
+    fi-castle - замок
+    fi-party-popper - хлопушка
+    fi-union - вилка и нож
+    fi-cake - торт
+    
+6. http://localhost:3000/addproperty  - ссылка для перехода на страницу addproperty

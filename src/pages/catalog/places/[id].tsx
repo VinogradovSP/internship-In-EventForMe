@@ -1,161 +1,206 @@
-import Link from "next/link";
+import Link from 'next/link';
 import { GetServerSideProps } from 'next';
-import { Place } from '@/types/catalog';
-import { URL } from '@/constant';
-import { Breadcrumb } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import AnchorBtns from "@/components/catalog/catalogItem/anchorBtns/AnchorBtns";
-import BookingForm from "@/components/bookingForm/BookingForm";
-import ContactForm from "@/components/bookingForm/ContactForm";
-import LocationPhotos from "@/components/catalog/catalogItem/locationPhotos/locationsPhotos";
-import RatingStars from "@/components/catalog/catalogItem/ratingStars/RatingStar";
-import YaComments from "../../../components/catalog/catalogItem/yaComments/YaComments";
-import YaMap from "../../../components/catalog/catalogItem/yaMap/yaMap";
-import styles from "@/styles/catalog/places/Places.module.scss";
-
+import { Breadcrumb, Col, Row, Card } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import AnchorBtns from '@/components/catalog/catalogItem/anchorBtns/AnchorBtns';
+import BookingForm from '@/components/bookingForm/BookingForm';
+import ContactForm from '@/components/bookingForm/ContactForm';
+import AlbumCard from '@/components/catalog/catalogItem/albumCard/AlbumCard';
+import {
+  PhotosWeddingsHeld,
+  ArticlesWeddings,
+  TextHeadingDescription,
+  TextHeadingSuitableFor,
+  TextHeadingDetailsKitchen,
+  TextHeadingFeatures,
+  TextHeadingSiteDetails,
+} from '@/components/catalog';
+import { cards } from '@/mocks/cards';
+import PlaceAreas from '@/components/catalog/catalogItem/placeAreas/PlaceAreas';
+import { SimilarItemsSlider } from '@/components/catalog/catalogItem/similarItemsSlider/similarItemsSlider';
+import LocationPhotos from '@/components/catalog/catalogItem/locationPhotos/locationsPhotos';
+import LocationDescription from '@/components/catalog/catalogItem/locationPhotos/LocationDescription';
+import YaMap from '@/components/catalog/catalogItem/yaMap/yaMap';
+import YaComments from '@/components/catalog/catalogItem/yaComments/YaComments';
+import RatingStars from '@/components/catalog/catalogItem/ratingStars/RatingStar';
+import { URL, Paths } from '@/constant';
+import { User } from '@/types/user';
+import { Place } from '@/types/placeType';
+import styles from '@/styles/catalog/places/Places.module.scss';
 
 type CatalogItemProps = {
-  item?: Place,
-}
+  place: Place;
+  user: User;
+};
 
-export default function CatalogItem({ item }: CatalogItemProps) {
+export default function CatalogItem({ place, user }: CatalogItemProps) {
+  const { providerCards } = cards || {};
+  const { photosHeld } = cards || {};
+  const { articles } = cards || {};
+
+  console.log('place', place);
 
   return (
     <Container>
-      <Breadcrumb className='breadcrumb'>
-        <Breadcrumb.Item linkAs={Link} href='/'>Главная</Breadcrumb.Item>
-        <Breadcrumb.Item linkAs={Link} href='/catalog'>Каталог</Breadcrumb.Item>
-        <Breadcrumb.Item linkAs={Link} href='/catalog'>Площадки</Breadcrumb.Item>
-        <Breadcrumb.Item active>{item?.title}</Breadcrumb.Item>
+      <Breadcrumb className="breadcrumb">
+        <Breadcrumb.Item linkAs={Link} href={Paths.Home}>
+          Главная
+        </Breadcrumb.Item>
+        <Breadcrumb.Item linkAs={Link} href={Paths.Catalog}>
+          Каталог
+        </Breadcrumb.Item>
+        <Breadcrumb.Item linkAs={Link} href={Paths.Places}>
+          Площадки
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>{place.title}</Breadcrumb.Item>
       </Breadcrumb>
 
       {/* тестовые данные для разных ситуаций, потом - удалить */}
-      <LocationPhotos photoUrls={[
-        'https://picsum.photos/369/224',
-        'https://picsum.photos/369/224',
-        'https://picsum.photos/369/224',
-        'https://picsum.photos/369/224',
-        'https://picsum.photos/369/224',
-      ]} />
+      <LocationPhotos
+        photoUrls={[
+          'https://picsum.photos/369/224',
+          'https://picsum.photos/369/224',
+          'https://picsum.photos/369/224',
+          'https://picsum.photos/369/224',
+          'https://picsum.photos/369/224',
+        ]}
+      />
 
       {/* это - общий контейнер страницы на все блоки под верхними фото */}
-      <div className={styles.location__flex_container}>
 
+      <Row className={styles.main__container}>
         {/* это - основной контейнер слева на странице */}
-        <div className={styles.left__container}>
-          <div className={styles.location__flex_container}>
-            <h3>{item?.title}</h3>
-            <p>3 зала 2 веранды 2 шатра</p>
-          </div>
-
-          <div className={styles.location__flex_container}>
-            <p>{item?.address.full}</p>
-            <Link href='#map' className={styles.location__map}>
-              <i className="fi-map" /> <p>На карте</p>
-            </Link>
-          </div>
-
+        <Col xl={8} className={styles.left__container}>
+          <LocationDescription item={place} />
 
           <AnchorBtns />
-          {/* все отсутстсвующие поля должны приходить с бэка */}
-          <h3>Описание:</h3>
-          <div className={styles.location__description_container}>
-            <ul className={styles.location__description_container_ul}>
-              <li className={styles.location__description_container_li}>Вместимость <span>{item?.capacity || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Расположение <span>{item?.placement || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Кухня <span>{item?.cuisine || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Время работы <span>{item?.hours || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Свой алкоголь <span>{item?.alcohol ? "Разрешено" : "Запрещено"}</span></li>
-            </ul>
-            <ul className={styles.location__description_container_ul}>
-              <li className={styles.location__description_container_li}>Аренда <span>{item?.lease || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Средний чек <span>{item?.avg_price || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Пробковый сбор <span>{item?.fee || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Депозит <span>{item?.deposit || 'нет информации'}</span></li>
-              <li className={styles.location__description_container_li}>Продление <span>{item?.continue || 'нет информации'}</span></li>
-            </ul>
-          </div>
 
-          <h3>Подходит для:</h3>
-          <ul>
-            <li>Свадьба</li>
-            <li>День рождения</li>
-            <li>Новый год</li>
-          </ul>
-          <ul>
-            <li>Фуршет</li>
-            <li>Мальчишник</li>
-            <li>Девичник</li>
-          </ul>
-          <ul>
-            <li> Выпускной</li>
-            <li> Корпоратив</li>
-            <li> Праздничный банкет</li>
-          </ul>
-          <h3>Детали о кухне площадки:</h3>
-          <p>Европейская, русская, кавказская кухня</p>
-          <p>Есть детское меню</p>
+          <TextHeadingDescription item={place} />
 
+          <TextHeadingSuitableFor />
 
-          <div id="map">
+          <TextHeadingDetailsKitchen />
+
+          <PlaceAreas areas={place.areas} average_check={place.average_check} />
+
+          <TextHeadingSiteDetails />
+
+          <TextHeadingFeatures />
+
+          {providerCards &&
+            providerCards.map((item) => (
+              <AlbumCard
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                pathImg={item.pathImg}
+              />
+            ))}
+
+          <Row className="my-xl-4 my-md-3 my-sm-2">
+            <Card.Title as="h4" className="mb-xl-4 mb-md-3 mb-sm-2">
+              Фото проведенных свадеб на площадке
+            </Card.Title>
+            <div className="d-flex justify-content-evenly">
+              {photosHeld &&
+                photosHeld.map((item) => (
+                  <PhotosWeddingsHeld
+                    key={item.id}
+                    title={item.title}
+                    description={item.description}
+                    pathImg={item.pathImg}
+                  />
+                ))}
+            </div>
+          </Row>
+
+          <Row className="justify-content-between my-xl-4 my-md-3 my-sm-2">
+            <Card.Title as="h4" className="mb-xl-4 mb-md-3 mb-sm-2 w-100">
+              Статьи о свадьбах на площадке “Villa Arcobaleno”
+            </Card.Title>
+            <div className="d-flex justify-content-evenly">
+              {articles &&
+                articles.map((item) => (
+                  <ArticlesWeddings
+                    key={item.id}
+                    title={item.title}
+                    description={item.description}
+                    pathImg={item.pathImg}
+                    dateText={item.dateText}
+                  />
+                ))}
+            </div>
+          </Row>
+
+          <div id="map" className={styles.map__container}>
             Здесь карта Яндекса с объектом
-            <YaMap/>
+            <YaMap />
           </div>
 
-          <div id="comments">
+          <div id="comments" className={styles.comments__container}>
             <YaComments />
           </div>
-
-        </div>
+        </Col>
 
         {/* это - боковой контейнер справа на странице */}
-        <div className={styles.right__container}>
-
+        <Col xl={4} lg={8} className={styles.right__container}>
           <div className={styles.popular__container}>
             {/* тестовые данные, потом - удалить */}
             <RatingStars rating={3.7} voices={58} />
             {/* <RatingStars rating={item?.rating?.rating || 0 } voices={item?.rating?.votes || 0} /> */}
             <div className={styles.popular__text}>
-              <p className={styles.popular__par}>В избранном у&nbsp;<span>{234} человека </span></p>
-              <p className={styles.popular__par}>Забронировано&nbsp;<span>{12} раз </span></p>
+              <p className={styles.popular__par}>
+                В избранном у&nbsp;<span>{234} человека </span>
+              </p>
+              <p className={styles.popular__par}>
+                Забронировано&nbsp;<span>{12} раз </span>
+              </p>
             </div>
           </div>
 
           {/* тестовые данные, потом - удалить */}
           <BookingForm
             avatar={'https://picsum.photos/100/100'}
-            first_name={"Имя"}
-            last_name={"Фамилия"}
-            phone={"12345678"}
-            email={"sshuahuash@mail.ru"}
+            first_name={'Имя'}
+            last_name={'Фамилия'}
+            phone={'12345678'}
+            email={'sshuahuash@mail.ru'}
           />
 
           <ContactForm />
-        </div>
-      </div>
+        </Col>
+      </Row>
+      <SimilarItemsSlider />
     </Container>
-  )
+  );
 }
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const id = context.params?.id;
-  const response = await fetch(`${URL}/places/${id}`);
+  const API = process.env.NODE_ENV === 'production' ? process.env.URL : URL;
+  console.log(API);
+  let response = await fetch(`${API}catalog/place/${id}/`);
   if (response.ok) {
-    const result: Place = await response.json();
+    let result = await response.json();
+    let user = result.user;
+    delete result.user;
 
     if (!result) {
       return {
         notFound: true,
-      }
+      };
     }
 
     return {
-      props: { item: result },
-    }
+      props: {
+        place: result,
+        user: user,
+      },
+    };
   }
 
   return {
     props: {},
-  }
-}
+  };
+};

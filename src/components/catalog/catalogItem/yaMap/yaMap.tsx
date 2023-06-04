@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 function YaMap() {
   const [addressCoord, setAddressCoord] = useState();
   const mapState = {
-    center: [55.684758, 37.738521],
+    center: [55.709169, 37.557293],
     zoom: 13,
     controls: []
   };
@@ -29,7 +29,7 @@ function YaMap() {
         height="50vh"
       >
          {/* {addressCoord && <Placemark geometry={addressCoord} />} */}
-        <Placemark geometry={[55.684758, 37.738521]} />
+        <Placemark geometry={[55.709169, 37.557293]} />
       </Map>
   )
 };

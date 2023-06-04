@@ -1,13 +1,13 @@
 @import '/src/styles/mixins';
 
-.top{
+.top {
   @include adaptiv-value('margin-top', 124, 10);
 }
 
-.icon{
+.icon {
   position: relative;
   padding-top: 50px;
-  &_img{
+  &_img {
     position: absolute;
     display: flex;
     align-items: center;
@@ -23,6 +23,6 @@
 }
 
 .description {
-  @include fz(9,16);
-  color: $grey;
+  @include fz(9, 16);
+  color: $gray;
 }

@@ -1,8 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';

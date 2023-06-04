@@ -1,4 +1,17 @@
-@import './_variables';
+//минимальная ширина (будет взята из макета для мобильных устройств, без рх)
+$min-width: 320;
+//максимальная ширина (в нашем макете это 1920, без рх)
+$max-width: 1920;
+
+$primary: #fe9589;
+$white: #ffffff;
+$transition: all 0.25s ease-in-out;
+$gray: #666276;
+$gray100: #f9f8fa;
+$gray800: #454056;
+$gray900: #1f1b2d;
+$star: #fdbc31;
+$black: #1f1b2d;
 
 //адаптивный шрифт
 //min-fz - минимальный размер шрифта (используется для мобильных устройств)
@@ -25,7 +38,9 @@
 // или тотже font-size
 // @include adaptiv-value('font-size', 16, 9);
 
-@mixin adaptiv-value($property, $startSize, $minSize){
+@mixin adaptiv-value($property, $startSize, $minSize) {
   $addSize: $startSize - $minSize;
-      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$max-width - 320}));
+  #{$property}: calc(
+    #{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$max-width - 320})
+  );
 }

@@ -9,3 +9,11 @@
   text-align: center;
   color: #FE9589;
 }
+
+.login__link {
+  white-space: nowrap;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

@@ -15,7 +15,7 @@ function ContactForm() {
 
     function handleSubmit () {
         if (phone.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/)) {
-            console.log (phone);
+            setPhone(phone);
         } else {
             setPhone('');
             setPlaceholder('Неверный формат');
@@ -24,7 +24,7 @@ function ContactForm() {
 
     return (<div className={styles.contactform__container}>
         <h4>Отправьте запрос на звонок и&nbsp;узнайте детали о площадке</h4>
-        <InputGroup size='sm' className='d-none d-lg-flex flex-nowrap'>
+        <InputGroup size='sm' className='d-lg-flex flex-nowrap'>
             <div className={styles.input__frame}>
                 <i className='fi-phone position-absolute text-muted top-50 translate-middle-y ps-1 ms-2'></i>
                 <Form.Control
@@ -33,6 +33,7 @@ function ContactForm() {
                     value={phone}
                     placeholder={placeholder}
                     onChange={handleChange}
+                    required
                 />
             </div>
             <Button className={styles.input__btn} onClick={handleSubmit}>Отправить</Button>
